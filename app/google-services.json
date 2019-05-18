@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "607688247912",
+    "firebase_url": "https://foodico-a1d7b.firebaseio.com",
+    "project_id": "foodico-a1d7b",
+    "storage_bucket": "foodico-a1d7b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:607688247912:android:e667a9c366946a99",
+        "android_client_info": {
+          "package_name": "com.example.foodico"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "607688247912-bh4cm8opev88c6anhat3uoqd7sijm4bv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.foodico",
+            "certificate_hash": "e4a436d3d303fe7f5e093ebb18af4f0b27721641"
+          }
+        },
+        {
+          "client_id": "607688247912-e0h1318e05sbsu0rm3ejlka255gtas8b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPKrfGFQ7yJIc2HqxyLPlR9L9pRRIREM4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "607688247912-e0h1318e05sbsu0rm3ejlka255gtas8b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
