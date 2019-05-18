@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Foodico</string>
+    <string name="email_string">Email</string>
+    <string name="password_string">Password</string>
+    <string name="login_string">Login</string>
+    <string name="signup_string">Sign up</string>
+    <string name="name_string">Name</string>
 </resources>

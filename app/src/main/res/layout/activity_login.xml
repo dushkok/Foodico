@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.LoginActivity">
+
+    <EditText
+        android:id="@+id/loginEmailInput"
+        style="@style/InputStyle"
+        android:layout_marginTop="100dp"
+        android:hint="@string/email_string"
+        android:inputType="textEmailAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/loginPasswordInput"
+        style="@style/InputStyle"
+        android:layout_marginTop="35dp"
+        android:hint="@string/password_string"
+        android:inputType="textPassword"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginEmailInput" />
+
+    <Button
+        android:id="@+id/loginButton"
+        style="@style/InputStyle"
+        android:layout_marginTop="30dp"
+        android:text="@string/login_string"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginPasswordInput" />
+
+    <Button
+        android:id="@+id/openSignupButton"
+        style="@style/InputStyle"
+        android:layout_marginTop="20dp"
+        android:text="@string/signup_string"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+</android.support.constraint.ConstraintLayout>
