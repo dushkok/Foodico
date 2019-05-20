@@ -34,6 +34,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Intent openMenu = new Intent(LoginActivity.this, MenuActivity.class);
+        startActivity(openMenu);
         ButterKnife.bind(this);
         User user = (User) getIntent().getSerializableExtra("signedupUser");
         if (user != null) {
@@ -68,6 +70,8 @@ public class LoginActivity extends AppCompatActivity {
                     if (user.getEmail().compareTo(email) == 0 &&
                             user.getPassword().compareTo(password) == 0) {
                         Toast.makeText(LoginActivity.this, "Successful login", Toast.LENGTH_SHORT).show();
+                        Intent openMenu = new Intent(LoginActivity.this, MenuActivity.class);
+                        startActivity(openMenu);
                     } else {
                         loginEmailInput.setError("Wrong email or password!");
                     }
