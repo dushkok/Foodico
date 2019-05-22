@@ -1,5 +1,6 @@
 package com.example.foodico.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -96,9 +97,9 @@ public class MenuActivity extends AppCompatActivity
         if (id == R.id.nav_menu) {
 
         } else if (id == R.id.nav_cart) {
-
+            Intent intent = new Intent(this, CartActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_orders) {
-
         } else if (id == R.id.nav_log_out) {
 
         }
