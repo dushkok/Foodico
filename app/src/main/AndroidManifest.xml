@@ -3,6 +3,7 @@
     package="com.example.foodico">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.OrdersActivity"></activity>
+        <service
+            android:name=".Service.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true"></service>
+
+        <activity android:name=".Activity.OrdersActivity" />
         <activity android:name=".Activity.CartActivity" />
         <activity android:name=".Activity.ItemDetailsActivity" />
         <activity

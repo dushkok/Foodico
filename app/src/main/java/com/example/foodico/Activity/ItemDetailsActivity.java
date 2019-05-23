@@ -1,5 +1,6 @@
 package com.example.foodico.Activity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -58,5 +59,11 @@ public class ItemDetailsActivity extends AppCompatActivity {
         databaseHelper.addOrUpdateItem(item);
         Snackbar.make(findViewById(R.id.activityItemDetailView), "Added to cart", Snackbar.LENGTH_SHORT)
                 .setAction("Action", null).show();
+    }
+
+    @OnClick(R.id.fabItemDetail)
+    public void onFabItemDetailClick() {
+        Intent intent = new Intent(this, CartActivity.class);
+        startActivity(intent);
     }
 }

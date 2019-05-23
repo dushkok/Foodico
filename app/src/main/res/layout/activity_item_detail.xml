@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/itemDetailImage"
-        android:layout_width="410dp"
-        android:layout_height="207dp"
+        android:layout_width="match_parent"
+        android:layout_height="210dp"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -21,6 +21,8 @@
         android:layout_height="75dp"
         android:layout_marginTop="150dp"
         android:layout_marginEnd="24dp"
+        android:background="@drawable/ic_add_to_cart_background"
+        android:src="@drawable/ic_add_shopping_cart_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/itemDetailImage" />
 
@@ -28,17 +30,17 @@
         android:id="@+id/itemDetailName"
         style="@style/ItemDetailText"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="148dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/itemDetailImage" />
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/itemDetailImage"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/itemDetailPrice"
         style="@style/ItemDetailText"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="148dp"
-        app:layout_constraintStart_toEndOf="@id/itemDetailName"
-        app:layout_constraintTop_toTopOf="@+id/itemDetailImage" />
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/itemDetailImage"
+        app:layout_constraintStart_toEndOf="@id/itemDetailName" />
 
     <TextView
         android:id="@+id/itemDetailDescription"
@@ -49,5 +51,14 @@
         android:textSize="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemDetailImage" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabItemDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_shopping_cart_white_24dp" />
 
 </android.support.constraint.ConstraintLayout>

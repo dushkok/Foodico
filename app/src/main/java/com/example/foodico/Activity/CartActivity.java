@@ -27,7 +27,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
@@ -44,6 +43,8 @@ public class CartActivity extends AppCompatActivity {
     TextView cartTotal;
     @BindView(R.id.placeOrderButton)
     Button placeOrderButton;
+    @BindView(R.id.emptyCart)
+    TextView emptyCart;
     private DatabaseHelper databaseHelper;
     private List<Item> cartItems;
     private CartAdapter cartAdapter;
@@ -64,8 +65,10 @@ public class CartActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("orders");
         if (cartItems.size() == 0) {
             placeOrderButton.setVisibility(View.INVISIBLE);
+            emptyCart.setVisibility(View.VISIBLE);
+        } else {
+            update();
         }
-        update();
     }
 
     public void update() {
@@ -78,6 +81,7 @@ public class CartActivity extends AppCompatActivity {
         if (cartItems.size() == 0) {
             placeOrderButton.setVisibility(View.INVISIBLE);
             cartTotal.setText("");
+            emptyCart.setVisibility(View.VISIBLE);
         }
         recyclerView.setAdapter(new CartAdapter(cartItems, this));
         recyclerView.invalidate();
