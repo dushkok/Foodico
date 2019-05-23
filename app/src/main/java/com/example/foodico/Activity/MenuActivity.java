@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.foodico.Adapter.MenuAdapter;
+import com.example.foodico.Helper.DatabaseHelper;
 import com.example.foodico.Model.Item;
 import com.example.foodico.R;
 import com.google.firebase.database.DataSnapshot;
@@ -100,8 +101,13 @@ public class MenuActivity extends AppCompatActivity
             Intent intent = new Intent(this, CartActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_orders) {
+            Intent intent = new Intent(this, OrdersActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_log_out) {
-
+            DatabaseHelper databaseHelper = new DatabaseHelper(this);
+            databaseHelper.logOutUser();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

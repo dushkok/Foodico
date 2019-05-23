@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.foodico.Helper.DatabaseHelper;
 import com.example.foodico.Model.User;
 import com.example.foodico.R;
 import com.google.firebase.database.DataSnapshot;
@@ -29,18 +30,22 @@ public class LoginActivity extends AppCompatActivity {
     EditText loginPasswordInput;
 
     private DatabaseReference databaseReference;
+    private DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Intent openMenu = new Intent(LoginActivity.this, MenuActivity.class);
-        startActivity(openMenu);
         ButterKnife.bind(this);
         User user = (User) getIntent().getSerializableExtra("signedupUser");
         if (user != null) {
             loginEmailInput.setText(user.getEmail());
             loginPasswordInput.setText(user.getPassword());
+        }
+        databaseHelper = new DatabaseHelper(this);
+        if (databaseHelper.getLoggedUser() != null) {
+            Intent startMenuActivity = new Intent(this, MenuActivity.class);
+            startActivity(startMenuActivity);
         }
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
     }
@@ -70,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (user.getEmail().compareTo(email) == 0 &&
                             user.getPassword().compareTo(password) == 0) {
                         Toast.makeText(LoginActivity.this, "Successful login", Toast.LENGTH_SHORT).show();
+                        databaseHelper.logInUser(user);
                         Intent openMenu = new Intent(LoginActivity.this, MenuActivity.class);
                         startActivity(openMenu);
                     } else {

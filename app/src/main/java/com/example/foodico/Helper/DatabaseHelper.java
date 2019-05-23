@@ -61,7 +61,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String password = cursor.getString(cursor.getColumnIndex("password"));
         cursor.close();
         db.close();
-        return new User(email, password, name);
+        return new User(name, email, password);
     }
 
     public boolean logInUser(User user) {
