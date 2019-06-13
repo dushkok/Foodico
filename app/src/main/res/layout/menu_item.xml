@@ -5,7 +5,7 @@
     android:layout_height="202dp"
     android:layout_margin="5dp"
     android:clickable="true"
-    app:cardBackgroundColor="@color/menuItemBackground"
+    app:cardBackgroundColor="@color/primaryLightColor"
     app:cardCornerRadius="4dp"
     app:cardElevation="3dp">
 

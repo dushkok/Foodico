@@ -32,8 +32,8 @@ public class Cart {
     }
 
     @Exclude
-    public int getTotalPrice() {
-        int sum = 0;
+    public float getTotalPrice() {
+        float sum = 0;
         for (Item item : cartItems) {
             sum += (item.getPrice() * item.getQuantity());
         }
@@ -43,8 +43,11 @@ public class Cart {
     @Exclude
     public String getCartContent() {
         StringBuilder builder = new StringBuilder();
-        for (Item item : cartItems) {
-            builder.append(item.getName()).append(", ");
+        for (int i = 0; i < getCartItems().size(); i++) {
+            builder.append(getCartItems().get(i).getName());
+            if (i != getCartItems().size()) {
+                builder.append(", ");
+            }
         }
         return builder.toString();
     }

@@ -73,11 +73,13 @@ public class CartActivity extends AppCompatActivity {
 
     public void update() {
         cartTotal.setText("Total sum: " + new Cart(cartItems).getTotalPrice() + "$");
+        cartTotal.setShadowLayer(1.6f, 1.5f, 1.3f, Color.BLACK);
     }
 
     public void onDelete() {
         cartItems = databaseHelper.getItemsInCart();
         cartTotal.setText("Total sum: " + new Cart(cartItems).getTotalPrice() + "$");
+        cartTotal.setShadowLayer(1.6f, 1.5f, 1.3f, Color.BLACK);
         if (cartItems.size() == 0) {
             placeOrderButton.setVisibility(View.INVISIBLE);
             cartTotal.setText("");
@@ -102,7 +104,7 @@ public class CartActivity extends AppCompatActivity {
                 if (input.getText().toString().length() != 0) {
                     placeOrder(input.getText().toString());
                 } else {
-                    input.setError("Address can't be empty!");
+                    Toast.makeText(CartActivity.this, "Address can't be empty!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

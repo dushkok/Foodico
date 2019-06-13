@@ -5,7 +5,7 @@
     android:layout_height="150dp"
     android:layout_margin="5dp"
     android:clickable="true"
-    app:cardBackgroundColor="@color/colorAccent"
+    app:cardBackgroundColor="@color/secondaryDarkColor"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp">
 
@@ -52,7 +52,7 @@
             android:layout_height="75dp"
             android:layout_marginStart="30dp"
             android:layout_marginTop="8dp"
-            android:solidColor="@color/colorAccent"
+            android:solidColor="@color/secondaryDarkColor"
             android:theme="@style/AppTheme.Picker"
             app:layout_constraintStart_toEndOf="@+id/cartItemImage"
             app:layout_constraintTop_toBottomOf="@+id/itemQty" />

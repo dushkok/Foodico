@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#9768ed</color>
-    <color name="colorPrimaryDark">#7d44e9</color>
-    <color name="colorAccent">#687ced</color>
-    <color name="menuItemBackground">#ed68be</color>
+    <!--<color name="colorPrimary">#9768ed</color>-->
+    <!--<color name="colorPrimaryDark">#7d44e9</color>-->
+    <!--<color name="colorAccent">#687ced</color>-->
+    <!--<color name="menuItemBackground">#ed68be</color>   -->
+    <color name="primaryColor">#9768ed</color>
+    <color name="primaryLightColor">#cb97ff</color>
+    <color name="primaryDarkColor">#643bba</color>
+    <color name="secondaryColor">#d968ed</color>
+    <color name="secondaryLightColor">#ff9aff</color>
+    <color name="secondaryDarkColor">#a535ba</color>
+    <color name="primaryTextColor">#FFFFFF</color>
+    <color name="secondaryTextColor">#000000</color>
 </resources>
