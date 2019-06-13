@@ -20,18 +20,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendMyNotification(String message) {
-
         Intent intent = new Intent(this, OrdersActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        String channelId = "Default";
 
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setStyle(new NotificationCompat.BigTextStyle())
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
                 .setContentTitle("Foodico order")
                 .setContentText(message)
                 .setAutoCancel(true)
-                .setVibrate(new long[]{1000, 1000})
+                .setVibrate(new long[]{250, 250, 100, 250, 250})
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setContentIntent(pendingIntent);
 

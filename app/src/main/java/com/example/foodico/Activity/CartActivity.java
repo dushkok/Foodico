@@ -131,7 +131,7 @@ public class CartActivity extends AppCompatActivity {
             public void onSuccess(Void aVoid) {
                 Toast.makeText(CartActivity.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
                 databaseHelper.emptyCart();
-                update();
+                onDelete();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
