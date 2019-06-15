@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.example.foodico.Adapter.OrderAdapter;
 import com.example.foodico.Helper.DatabaseHelper;
@@ -35,7 +37,6 @@ public class OrdersActivity extends AppCompatActivity {
         User currentUser = databaseHelper.getLoggedUser();
         Query query = databaseReference.orderByChild("userEmail").equalTo(currentUser.getEmail());
         query.addListenerForSingleValueEvent(valueEventListener());
-
     }
 
     public ValueEventListener valueEventListener() {
@@ -48,6 +49,10 @@ public class OrdersActivity extends AppCompatActivity {
                         orderList.add(item.getValue(Order.class));
                     }
                     loadRecyclerView();
+                }
+                if (orderList.size() == 0) {
+                    TextView emptyOrders = findViewById(R.id.emptyOrders);
+                    emptyOrders.setVisibility(View.VISIBLE);
                 }
             }
 

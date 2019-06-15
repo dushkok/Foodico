@@ -17,5 +17,8 @@
     <string name="menu_cart">Cart</string>
     <string name="menu_orders">Orders</string>
     <string name="menu_log_out">Log out</string>
+    <string name="your_cart_is_empty">Your cart is empty.</string>
+    <string name="place_order">Place order</string>
+    <string name="your_have_no_past_orders">Your have no past orders.</string>
 
 </resources>
