@@ -45,6 +45,7 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         ButterKnife.bind(this);
+        getSupportActionBar().setTitle("Sign up");
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
     }
 

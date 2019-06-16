@@ -19,9 +19,13 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Activity.OrdersActivity" />
+        <activity
+            android:name=".Activity.OrdersActivity"
+            android:parentActivityName=".Activity.MenuActivity" />
         <activity android:name=".Activity.CartActivity" />
-        <activity android:name=".Activity.ItemDetailsActivity" />
+        <activity
+            android:name=".Activity.ItemDetailsActivity"
+            android:parentActivityName=".Activity.MenuActivity" />
         <activity
             android:name=".Activity.MenuActivity"
             android:label="@string/title_activity_menu"

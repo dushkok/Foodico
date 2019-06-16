@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -51,6 +52,9 @@ public class CartActivity extends AppCompatActivity {
     @BindView(R.id.emptyCart)
     TextView emptyCart;
 
+    @BindView(R.id.orderDetails)
+    ConstraintLayout orderDetails;
+
     private DatabaseHelper databaseHelper;
     private List<Item> cartItems;
     private CartAdapter cartAdapter;
@@ -62,6 +66,7 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
         ButterKnife.bind(this);
+        getSupportActionBar().setTitle("Cart");
         databaseHelper = new DatabaseHelper(this);
         cartItems = databaseHelper.getItemsInCart();
         cartAdapter = new CartAdapter(cartItems, this);
@@ -72,24 +77,26 @@ public class CartActivity extends AppCompatActivity {
         if (cartItems.size() == 0) {
             placeOrderButton.setVisibility(View.INVISIBLE);
             emptyCart.setVisibility(View.VISIBLE);
+            orderDetails.setVisibility(View.INVISIBLE);
         } else {
             update();
         }
     }
 
     public void update() {
-        cartTotal.setText("Total sum: " + new Cart(cartItems).getTotalPrice() + "$");
+        String total = String.format("%.2f", new Cart(cartItems).getTotalPrice());
+        cartTotal.setText("Total sum: " + total + "$");
         cartTotal.setShadowLayer(1.6f, 1.5f, 1.3f, Color.BLACK);
     }
 
     public void onDelete() {
         cartItems = databaseHelper.getItemsInCart();
-        cartTotal.setText("Total sum: " + new Cart(cartItems).getTotalPrice() + "$");
-        cartTotal.setShadowLayer(1.6f, 1.5f, 1.3f, Color.BLACK);
+        update();
         if (cartItems.size() == 0) {
             placeOrderButton.setVisibility(View.INVISIBLE);
             cartTotal.setText("");
             emptyCart.setVisibility(View.VISIBLE);
+            orderDetails.setVisibility(View.INVISIBLE);
         }
         recyclerView.setAdapter(new CartAdapter(cartItems, this));
         recyclerView.invalidate();

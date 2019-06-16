@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        getSupportActionBar().setTitle("Log in");
         User user = (User) getIntent().getSerializableExtra("signedupUser");
         if (user != null) {
             loginEmailInput.setText(user.getEmail());

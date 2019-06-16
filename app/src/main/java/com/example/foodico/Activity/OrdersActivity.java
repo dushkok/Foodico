@@ -43,6 +43,7 @@ public class OrdersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
         ButterKnife.bind(this);
+        getSupportActionBar().setTitle("Orders");
         databaseReference = FirebaseDatabase.getInstance().getReference("orders");
         databaseHelper = new DatabaseHelper(this);
         User currentUser = databaseHelper.getLoggedUser();
