@@ -43,11 +43,14 @@ public class Cart {
     @Exclude
     public String getCartContent() {
         StringBuilder builder = new StringBuilder();
-        for (int i = 0; i < getCartItems().size(); i++) {
-            builder.append(getCartItems().get(i).getName());
-            if (i != getCartItems().size()) {
+        if (getCartItems().size() == 1) {
+            return getCartItems().get(0).getName();
+        } else {
+            for (int i = 0; i < getCartItems().size() - 1; i++) {
+                builder.append(getCartItems().get(i).getName());
                 builder.append(", ");
             }
+            builder.append(getCartItems().get(getCartItems().size() - 1).getName());
         }
         return builder.toString();
     }

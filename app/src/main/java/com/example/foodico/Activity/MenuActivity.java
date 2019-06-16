@@ -14,10 +14,13 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.foodico.Adapter.MenuAdapter;
 import com.example.foodico.Helper.DatabaseHelper;
 import com.example.foodico.Model.Item;
+import com.example.foodico.Model.User;
 import com.example.foodico.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,8 +31,26 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    @BindView(R.id.progressBarMenu)
+    ProgressBar progressBarMenu;
+
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
+    @BindView(R.id.drawer_layout)
+    DrawerLayout drawer;
+
+    @BindView(R.id.nav_view)
+    NavigationView navigationView;
 
     private DatabaseReference databaseReference;
 
@@ -37,9 +58,9 @@ public class MenuActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
+
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,13 +68,22 @@ public class MenuActivity extends AppCompatActivity
                 startActivity(intent);
             }
         });
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        DatabaseHelper databaseHelper = new DatabaseHelper(this);
+        User user = databaseHelper.getLoggedUser();
+
+        View navHeaderView = navigationView.getHeaderView(0);
+        TextView userName = navHeaderView.findViewById(R.id.userName);
+        TextView userEmail = navHeaderView.findViewById(R.id.userEmail);
+        userName.setText(user.getName());
+        userEmail.setText(user.getEmail());
 
         databaseReference = FirebaseDatabase.getInstance().getReference("menu");
         databaseReference.addListenerForSingleValueEvent(getValueListener());
@@ -70,9 +100,7 @@ public class MenuActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
         int id = item.getItemId();
-
         if (id == R.id.nav_menu) {
 
         } else if (id == R.id.nav_cart) {
@@ -99,12 +127,12 @@ public class MenuActivity extends AppCompatActivity
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(menuAdapter);
+        progressBarMenu.setVisibility(View.INVISIBLE);
     }
 
     public ValueEventListener getValueListener() {
         return new ValueEventListener() {
             List<Item> menuItems = new ArrayList<>();
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 menuItems = new ArrayList<>();

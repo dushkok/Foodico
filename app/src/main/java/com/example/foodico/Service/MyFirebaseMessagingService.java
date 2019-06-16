@@ -31,7 +31,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 .setContentTitle("Foodico order")
                 .setContentText(message)
                 .setAutoCancel(true)
-                .setVibrate(new long[]{250, 250, 100, 250, 250})
+                .setVibrate(new long[]{250, 240, 100, 250, 240})
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setContentIntent(pendingIntent);
 

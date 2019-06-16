@@ -24,4 +24,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/ordersRecyclerView" />
 
+    <ProgressBar
+        android:id="@+id/progressBarOrders"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="#ffff"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/primaryDarkColor"
+        android:max="100"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ordersRecyclerView" />
+
 </android.support.constraint.ConstraintLayout>

@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.foodico.Helper.DatabaseHelper;
@@ -29,6 +31,9 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.loginPasswordInput)
     EditText loginPasswordInput;
 
+    @BindView(R.id.progressBarLogin)
+    ProgressBar progressBarLogin;
+
     private DatabaseReference databaseReference;
     private DatabaseHelper databaseHelper;
 
@@ -50,6 +55,11 @@ public class LoginActivity extends AppCompatActivity {
         databaseReference = FirebaseDatabase.getInstance().getReference("users");
     }
 
+    @Override
+    public void onBackPressed() {
+        // nothing happens.
+    }
+
     @OnClick(R.id.openSignupButton)
     public void onOpenSignupButtonClick() {
         Intent openSignUpActivity = new Intent(this, SignupActivity.class);
@@ -59,6 +69,7 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.loginButton)
     public void onLoginButtonClick() {
         if (validateInput()) {
+            progressBarLogin.setVisibility(View.VISIBLE);
             String email = loginEmailInput.getText().toString();
             String password = loginPasswordInput.getText().toString();
             Query query = databaseReference.orderByChild("email").equalTo(email);
@@ -74,14 +85,17 @@ public class LoginActivity extends AppCompatActivity {
                     User user = dataSnapshot.getChildren().iterator().next().getValue(User.class);
                     if (user.getEmail().compareTo(email) == 0 &&
                             user.getPassword().compareTo(password) == 0) {
+                        progressBarLogin.setVisibility(View.INVISIBLE);
                         Toast.makeText(LoginActivity.this, "Successful login", Toast.LENGTH_SHORT).show();
                         databaseHelper.logInUser(user);
                         Intent openMenu = new Intent(LoginActivity.this, MenuActivity.class);
                         startActivity(openMenu);
                     } else {
+                        progressBarLogin.setVisibility(View.INVISIBLE);
                         loginEmailInput.setError("Wrong email or password!");
                     }
                 } else {
+                    progressBarLogin.setVisibility(View.INVISIBLE);
                     Toast.makeText(LoginActivity.this, "Failed login", Toast.LENGTH_SHORT).show();
                 }
             }

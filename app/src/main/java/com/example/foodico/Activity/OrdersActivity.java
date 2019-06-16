@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.foodico.Adapter.OrderAdapter;
@@ -22,7 +23,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class OrdersActivity extends AppCompatActivity {
+
+    @BindView(R.id.progressBarOrders)
+    ProgressBar progressBarOrders;
+
+    @BindView(R.id.emptyOrders)
+    TextView emptyOrders;
 
     private DatabaseReference databaseReference;
     private DatabaseHelper databaseHelper;
@@ -32,6 +42,7 @@ public class OrdersActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orders);
+        ButterKnife.bind(this);
         databaseReference = FirebaseDatabase.getInstance().getReference("orders");
         databaseHelper = new DatabaseHelper(this);
         User currentUser = databaseHelper.getLoggedUser();
@@ -51,8 +62,8 @@ public class OrdersActivity extends AppCompatActivity {
                     loadRecyclerView();
                 }
                 if (orderList.size() == 0) {
-                    TextView emptyOrders = findViewById(R.id.emptyOrders);
                     emptyOrders.setVisibility(View.VISIBLE);
+                    progressBarOrders.setVisibility(View.INVISIBLE);
                 }
             }
 
@@ -69,5 +80,6 @@ public class OrdersActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(orderAdapter);
+        progressBarOrders.setVisibility(View.INVISIBLE);
     }
 }

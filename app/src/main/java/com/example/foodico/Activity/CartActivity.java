@@ -1,8 +1,10 @@
 package com.example.foodico.Activity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -39,12 +41,16 @@ public class CartActivity extends AppCompatActivity {
 
     @BindView(R.id.cartRecyclerView)
     RecyclerView recyclerView;
+
     @BindView(R.id.cartTotal)
     TextView cartTotal;
+
     @BindView(R.id.placeOrderButton)
     Button placeOrderButton;
+
     @BindView(R.id.emptyCart)
     TextView emptyCart;
+
     private DatabaseHelper databaseHelper;
     private List<Item> cartItems;
     private CartAdapter cartAdapter;
@@ -122,7 +128,7 @@ public class CartActivity extends AppCompatActivity {
         String userEmail = databaseHelper.getLoggedUser().getEmail();
         String orderId = databaseReference.push().getKey();
         String userToken = FirebaseInstanceId.getInstance().getToken();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MMM.yyyy HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd MMM yyyy HH:mm:ss");
         String time = simpleDateFormat.format(Calendar.getInstance().getTime());
         Order order = new Order(cart, address, userEmail, userToken, time);
 
@@ -132,6 +138,14 @@ public class CartActivity extends AppCompatActivity {
                 Toast.makeText(CartActivity.this, "Order placed successfully", Toast.LENGTH_SHORT).show();
                 databaseHelper.emptyCart();
                 onDelete();
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Intent intent = new Intent(CartActivity.this, OrdersActivity.class);
+                        startActivity(intent);
+                    }
+                }, Toast.LENGTH_LONG);
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
