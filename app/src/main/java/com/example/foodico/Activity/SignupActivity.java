@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.foodico.Model.User;
@@ -33,6 +35,9 @@ public class SignupActivity extends AppCompatActivity {
     @BindView(R.id.signupPasswordInput)
     EditText signupPasswordInput;
 
+    @BindView(R.id.progressBarSignup)
+    ProgressBar progressBarSignup;
+
     private DatabaseReference databaseReference;
 
     @Override
@@ -48,6 +53,7 @@ public class SignupActivity extends AppCompatActivity {
         final User newUser = getUser();
         Query query = databaseReference.orderByChild("email").equalTo(newUser.getEmail());
         if (validateInput()) {
+            progressBarSignup.setVisibility(View.VISIBLE);
             query.addListenerForSingleValueEvent(valueEventListener(newUser));
         }
     }
@@ -63,6 +69,7 @@ public class SignupActivity extends AppCompatActivity {
                     databaseReference.child(id).setValue(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
+                            progressBarSignup.setVisibility(View.INVISIBLE);
                             Toast.makeText(SignupActivity.this, "Sign up successful!", Toast.LENGTH_LONG).show();
                             Intent startLoginActivity = new Intent(SignupActivity.this, LoginActivity.class);
                             startLoginActivity.putExtra("signedupUser", user);
@@ -71,6 +78,7 @@ public class SignupActivity extends AppCompatActivity {
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            progressBarSignup.setVisibility(View.INVISIBLE);
                             Toast.makeText(SignupActivity.this, "Error signing up!", Toast.LENGTH_SHORT).show();
                         }
                     });

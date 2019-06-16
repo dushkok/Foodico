@@ -44,13 +44,19 @@ public class Cart {
     public String getCartContent() {
         StringBuilder builder = new StringBuilder();
         if (getCartItems().size() == 1) {
-            return getCartItems().get(0).getName();
+            Item temp = getCartItems().get(0);
+            return temp.getQuantity() + " X " + temp.getName();
         } else {
             for (int i = 0; i < getCartItems().size() - 1; i++) {
-                builder.append(getCartItems().get(i).getName());
-                builder.append(", ");
+                Item temp = getCartItems().get(i);
+                builder.append(temp.getQuantity())
+                        .append(" X ")
+                        .append(temp.getName())
+                        .append(", ");
             }
-            builder.append(getCartItems().get(getCartItems().size() - 1).getName());
+            builder.append(getCartItems().get(getCartItems().size() - 1).getQuantity())
+                    .append(" X ")
+                    .append(getCartItems().get(getCartItems().size() - 1).getName());
         }
         return builder.toString();
     }

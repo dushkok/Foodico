@@ -47,8 +47,8 @@ public class ItemDetailsActivity extends AppCompatActivity {
                 .into(itemDetailImage);
 
         itemDetailName.setText(item.getName());
-        itemDetailName.setShadowLayer(1.6f, 1.5f, 1.3f, Color.BLACK);
-        itemDetailPrice.setShadowLayer(1.6f, 1.5f, 1.3f, Color.BLACK);
+        itemDetailName.setShadowLayer(1.8f, 1.7f, 1.5f, Color.BLACK);
+        itemDetailPrice.setShadowLayer(1.8f, 1.7f, 1.5f, Color.BLACK);
         itemDetailPrice.setText(item.getPrice() + "$");
         itemDetailDescription.setText(item.getDescription());
     }
